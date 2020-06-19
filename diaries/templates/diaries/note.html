@@ -1,0 +1,32 @@
+{% extends "diaries/base.html" %}
+
+{% block header %} {% endblock header %} 
+{% block content %}
+    {% for n in note %}
+<!--MAIN -->
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href="{% url 'diaries:aluno' aluno_id=n.student.id %}"> {{n.student}}  </a>
+            </h5>
+            <h6 class="card-subtitle mb-2 text-muted"> Em {{n.date_added}}</h6>
+            <p class="card-text">{{n.text|linebreaks}}</p>
+
+        </div>
+    </div>
+<!--BUTTONS-->
+<div class="d-flex flex-row justify-content-between m-5">
+    <a class="btn btn-primary btn-lg active" href="{% url 'diaries:edit_anotacao' note_id=n.id %}">Editar</a>
+    <a class="btn btn-secondary btn-lg active" href="{% url 'diaries:anotacoes' %}">Voltar</a>
+    <a class="btn btn-danger btn-lg active" href="{% url 'diaries:note_delete' note_id=n.id %}">Excluir</a>
+
+</div>
+
+    
+    {% empty %}
+<div class="alert alert-warning" role="alert">
+  Invalid
+</div>
+    {% endfor %}
+
+{% endblock content %}

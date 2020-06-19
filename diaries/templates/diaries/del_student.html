@@ -1,0 +1,14 @@
+{% extends "diaries/base.html" %}
+
+{% block header %} {% endblock header %} 
+{% block content %}
+<p>Excluir {{s.name}}:</p>
+<div class="alert alert-danger" role="alert">
+ A exclusão é irreversível. Deseja Continuar?
+</div>
+<form action="{% url 'diaries:del_aluno' aluno_id=s.id %}" method='POST'>
+    {% csrf_token %}
+    <a class="btn btn-secondary active" href="{% url 'diaries:alunos' %}">Cancelar</a>
+    <input class="btn btn-danger active" type="submit" value="Confirmar">
+</form>
+{% endblock content %}

@@ -1,0 +1,156 @@
+{% extends "diaries/base.html" %}
+
+{% block header %} 
+    {% for s in student %}
+    <h3 class="text-dark">
+        <strong>
+            {{s.name|upper}} {{s.lname|upper}}
+        </strong>
+    </h3>
+    
+    {% endfor %}
+{% endblock header %} 
+
+<!--MAIN-->
+{% block content %}
+{% for s in student %}
+{% if s.novalid %}
+
+<div class="alert alert-info" role="alert">
+  Este aluno está inativo!
+</div>
+{% else %}
+<div class="d-flex align-content-start flex-wrap">
+
+    <div class="card m-2" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title text-info">CPF:</h5>
+        <p class="card-text">{{s.ncpf}}</p>
+      </div>
+    </div>
+    
+    <div class="card m-2" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title text-info">Documento RG:</h5>
+        <p class="card-text">{{s.nrg}}</p>
+      </div>
+    </div>
+    
+    <div class="card m-2" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title text-info">Data nascimento:</h5>
+        <p class="card-text">{{s.birth_date}}</p>
+      </div>
+    </div>
+    
+    <div class="card m-2" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title text-info">Telefone:</h5>
+        <p class="card-text">{{s.nphone01}}</p>
+      </div>
+    </div>
+    
+    <div class="card m-2" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title text-info">Celular:</h5>
+        <p class="card-text">{{s.nphone02}}</p>
+      </div>
+    </div>
+    
+    <div class="card m-2" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title text-info">Endereço:</h5>
+        <p class="card-text">{{s.addr01}}<br>{{s.addr02}}</p>
+      </div>
+    </div>
+    
+    <div class="card m-2" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title text-info">Bairro:</h5>
+        <p class="card-text">{{s.district}}</p>
+      </div>
+    </div>
+    
+    <div class="card m-2" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title text-info">Cidade e estado:</h5>
+        <p class="card-text">{{s.local}} - {{s.state}}</p>
+      </div>
+    </div>
+    
+    <div class="card m-2" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title text-info">Email:</h5>
+        <p class="card-text">{{s.email}}</p>
+      </div>
+    </div>
+    
+    <div class="card m-2" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title text-info">Curso:</h5>
+        <p class="card-text">{{s.course}}</p>
+      </div>
+    </div>
+    
+    <div class="card m-2" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title text-info">Turma:</h5>
+        <p class="card-text">{{s.team}}</p>
+      </div>
+    </div>
+    
+    <div class="card m-2" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title text-info">Instituição:</h5>
+        <p class="card-text">{{s.college}}</p>
+      </div>
+    </div>
+    
+    <div class="card m-2" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title text-info">Conclusão:</h5>
+        <p class="card-text">{{s.finish}}</p>
+      </div>
+    </div>
+    
+    <div class="card m-2" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title text-info">Data de cadastro:</h5>
+        <p class="card-text">{{s.date_added}}</p>
+      </div>
+    </div>
+    
+    <div class="card m-2" style="width: 18rem;">
+        <div class="card-body  bg-warning">
+            <h5 class="card-title">Histórico de anotações</h5>
+            <form action="{% url 'diaries:search_note' %}" method='GET'>
+            <input type="hidden" name="q" value="{{s.name}}">
+            <button type="submit" class="btn btn-primary">
+                <svg class="bi bi-arrow-right-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path fill-rule="evenodd" d="M7.646 11.354a.5.5 0 0 1 0-.708L10.293 8 7.646 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0z"/>
+                <path fill-rule="evenodd" d="M4.5 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"/>
+                </svg>
+            </button>
+        </form>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+<!-- BUTTONS -->
+<div class="d-flex flex-row justify-content-between m-5">
+    <a class="btn btn-primary active" href="{% url 'diaries:edit_aluno' aluno_id=s.id %}">Editar</a>
+    <a class="btn btn-secondary active" href="{% url 'diaries:alunos' %}">Voltar</a>
+    <a class="btn btn-danger active" href="{% url 'diaries:del_aluno' aluno_id=s.id %}">Excluir</a>
+    
+</div>
+
+{% empty %}
+<div class="alert alert-warning" role="alert">
+  Invalid
+</div>
+{% endfor %}
+
+
+{% endblock content %}

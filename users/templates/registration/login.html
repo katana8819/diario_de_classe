@@ -1,0 +1,26 @@
+{% extends "diaries/base.html" %}
+{% load bootstrap4 %}
+{% bootstrap_javascript jquery='full' %}
+
+{% block header %}
+	<h3>
+            Faça login para continuar: 
+    </h3>
+{% endblock header %}
+    
+{% block content %}
+<div class="d-flex justify-content-center">
+    <form action="{% url 'users:login' %}" method='POST'>
+                {% csrf_token %}
+                {% bootstrap_form_errors form %}
+                {% bootstrap_field form.username layout="horizontal" show_label=False %}
+                {% bootstrap_field form.password layout="horizontal" show_label=False%}
+        
+                
+                {% bootstrap_button "Login" button_type="submit" button_class="btn btn-dark" %}
+                {% bootstrap_messages %}
+                <input type="hidden" name="next" value="{% url 'diaries:index' %}" />
+    </form>
+
+</div>
+{% endblock content %}

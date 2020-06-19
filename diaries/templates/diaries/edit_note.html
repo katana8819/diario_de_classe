@@ -1,0 +1,19 @@
+{% extends "diaries/base.html" %}
+{% load bootstrap4 %}
+{% bootstrap_javascript jquery='full' %}
+
+{% block header %}
+    <h3>
+        Editar anotação:
+    </h3>
+{% endblock header %} 
+{% block content %}
+<form action="{% url 'diaries:edit_anotacao' note_id=note.id %}" method='POST'>
+    <div class="d-flex flex-wrap justify-content-around">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+    </div>
+    <button name="submit" class="btn btn-success active">Salvar</button>
+    <a href="{% url 'diaries:anotacoes' %}" class="btn btn-secondary active">Voltar</a>
+</form>
+{% endblock content %}

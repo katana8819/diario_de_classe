@@ -1,0 +1,27 @@
+{% extends "diaries/base.html" %}
+{% load bootstrap4 %}
+{% bootstrap_javascript jquery='full' %}
+
+{% block header %} 
+    <h3>Editar aluno:    </h3>
+{% endblock header %} 
+{% block content %}
+<style scoped>
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+<form action="{% url 'diaries:edit_aluno' aluno_id=aluno.id %}" method='POST'>
+    <div class="d-flex flex-wrap justify-content-between">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+    </div>
+    <button name="submit" class="btn btn-success active">Salvar</button>
+    <a href="{% url 'diaries:alunos' %}" class="btn btn-secondary active">Voltar</a>
+</form>
+{% endblock content %}
