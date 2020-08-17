@@ -4,11 +4,10 @@ Aplicação desenvolvida para controle interno de escola. Em Alunos depois de pr
 
 https://cs-diary.herokuapp.com/
 
-No terminal instale e rode o virtual env, depois instale os pacotes do django e mysqlclient do python, em seguida execute os comandos:
+No terminal instale e rode o virtual env, depois instale os pacotes do django e mysqlclient do python. Configure a base do mysql em settings.py e após execute os comandos no terminal:
 
 1 - python manage.py makemigrations
 ##
 2 - python manage.py migrate
 ##
 3 - python manage.py runserver
-
