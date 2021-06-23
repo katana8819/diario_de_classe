@@ -1,6 +1,6 @@
 # class_diary
 
-Aplicação CRUD desenvolvida utilizando Django 3.
+Aplicação CRUD desenvolvida utilizando Django 3 com banco de dados MySql.
 
 https://cs-diary.herokuapp.com/
 
